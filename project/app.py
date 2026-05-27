@@ -1,6 +1,9 @@
+import os
 import pickle
 import streamlit as st
 import requests
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 st.set_page_config(page_title="Movie Recommender", page_icon="🎬", layout="wide")
 
@@ -31,8 +34,8 @@ def recommend(movie):
 st.title("🎬 Movie Recommender System")
 st.markdown("Select a movie to get **5 similar recommendations** based on genre, cast, keywords, and crew.")
 
-movies = pickle.load(open('model/movie_list.pkl', 'rb'))
-similarity = pickle.load(open('model/similarity.pkl', 'rb'))
+movies = pickle.load(open(os.path.join(BASE_DIR, 'model', 'movie_list.pkl'), 'rb'))
+similarity = pickle.load(open(os.path.join(BASE_DIR, 'model', 'similarity.pkl'), 'rb'))
 
 movie_list = movies['title'].values
 selected_movie = st.selectbox("Type or select a movie from the dropdown", movie_list)
